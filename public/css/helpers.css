@@ -1,0 +1,94 @@
+/****************************************** 
+	
+		Desenvolvido por Gabriel da Luz 
+		
+		http://gabrieldaluz.com.br/
+	
+*******************************************/
+/* ~~~~~~~~~~~~~**~~~~~ Examples ~~~~~**~~~~~~~~~~~~~ */
+
+
+/*
+	Section Slider Example com owl-carousel 
+*/
+/*
+	section.slider { position:relative; z-index:1; }
+	section.slider .owl-carousel { position:relative; }
+	section.slider .owl-carousel .owl-nav { position:absolute; top:40%; width:100%; }
+	section.slider .owl-carousel .owl-prev { position:absolute;  left:10%; border-radius: 100%;   -webkit-transition: all 500ms ease-out; -moz-transition: all 500ms ease-out; -o-transition: all 500ms ease-out; transition: all 500ms ease-out; }
+	section.slider .owl-carousel .owl-next { position:absolute;  right:10%; border-radius: 100%;  -webkit-transition: all 500ms ease-out; -moz-transition: all 500ms ease-out; -o-transition: all 500ms ease-out; transition: all 500ms ease-out;  }
+	section.slider .owl-carousel .owl-item img { height:375px; object-fit: cover; }
+*/
+
+
+/* Variables */
+.hidden { display:none; }
+.no-select, img {  -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;  }
+
+/* Desativar link */
+a.disabled {pointer-events: none;cursor: default;}
+
+.pd-t-0 { padding-top:0px; }
+.pd-t-10 { padding-top:10px; }
+.pd-t-30 { padding-top:30px; }
+.pd-t-60 { padding-top:60px; }
+.pd-t-100 { padding-top:100px; } 
+
+.pd-b-10 { padding-bottom:10px; }
+.pd-b-30 { padding-bottom:30px; }
+.pd-b-40 { padding-bottom:40px; }
+.pd-b-50 { padding-bottom:50px; }
+
+.pd-l-0 { padding-left:0px; }
+.pd-l-3 { padding-left:3px; }
+.pd-l-6 { padding-left:6px; }
+
+.pd-r-0 { padding-right:0px; }
+.pd-r-3 { padding-right:3px; }
+.pd-r-6 { padding-right:6px; }
+
+.mg-t-10  { margin-top: 10px; }
+.mg-t-25  { margin-top: 25px; }
+.mg-t-46  { margin-top: 46px; }
+
+.mg-b-15  { margin-bottom: 15px; }
+
+.mg-l-0 { margin-left: 0px; }
+.mg-l-40 { margin-left: 40px;  }
+
+.mg-r-40 { margin-right: 40px;  }
+
+/* Alinhamento */
+.align-center { text-align:center; }
+.align-left { text-align:left; }
+.align-right { text-align:right; }
+.align-middle { display: flex; align-items: center; }
+
+/* Clear Floats */
+.clear { clear:both; }
+
+/* Effects Hover */
+.fx-ease-out-250 { -webkit-transition: all 250ms ease-out; -moz-transition: all 250ms ease-out; -o-transition: all 250ms ease-out; transition: all 250ms ease-out; }
+.fx-ease-out-500 { -webkit-transition: all 500ms ease-out; -moz-transition: all 500ms ease-out; -o-transition: all 500ms ease-out; transition: all 500ms ease-out; }
+.fx-translatex-3:hover { transform: translateX(3px); }
+.fx-scale-0-9:hover { transform: scale(0.9);  }
+
+/* Backgrounds */
+.bg-gray-1 { background:#F8F8F8; }
+
+/* Buttons */
+.btnPlusLarge { margin-top:2px; margin-bottom:2px; background:#6FCCDD; color:white; font-size:16px; display:block; width:100%; max-width:370px; margin:0 auto; text-align:center; padding:17px 10px; border-radius:10px; -webkit-transition: all 250ms ease-out; -moz-transition: all 250ms ease-out; -o-transition: all 250ms ease-out; transition: all 250ms ease-out; }
+.btnPlusLarge:hover {  background:#2e8fa0; color:white; }
+.btnPlusLarge span { position:relative; top:1px; margin-left:5px; }
+
+/* Borders */
+.border-red { border-color:red; }
+
+/* Colors */
+.color-red { color:red; }
+
+/* Circles Boxed */
+.bxCircle-xs-blue {     background: #096acd;color: white;padding: 5px 12px;font-size: 12px; border-radius: 30px;     margin: 2px;     display: inline-block;}
+.bxCircle-xs-gray {     background: gray;color: white;padding: 5px 12px;font-size: 12px; border-radius: 30px;    margin: 2px;     display: inline-block;}
+.bxCircle-xs-black {     background: black; color: white;padding: 5px 12px;font-size: 12px; border-radius: 30px;    margin: 2px;     display: inline-block;}
+.bxCircle-xs-green {     background: #0dcc00; color: white;padding: 5px 12px;font-size: 12px; border-radius: 30px;    margin: 2px;     display: inline-block;}
