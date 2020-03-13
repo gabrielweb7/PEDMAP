@@ -37,16 +37,16 @@
                 <input type="hidden" id="dataAjaxRouteDelete" value="{{ route('modulo-'.$menuItem->modulo_nome.'-delete-post') }}" />
                 <input type="hidden" id="dataOrderDefault" value="1" />
                 <input type="hidden" id="dataOrderDefaultSentido" value="desc" />
-                <input type="hidden" id="dataColumnDefs" value='[{ "width": "1%", "targets": 0 },{ "width": "10%", "targets": 4 },{"className":"align-center", "targets": "align-center"},{ "orderable": false, "targets": "no-sort" }]' />
+                <input type="hidden" id="dataColumnDefs" value='[{ "width": "1%", "targets": 0 },{ "width": "10%", "targets": 3 },{ "width": "10%", "targets": 4 },{"className":"align-center", "targets": "align-center"},{ "orderable": false, "targets": "no-sort" }]' />
 
                 <!-- table :: getDataAjax -->
                 <table id="getDataAjax" class="table table-bordered" style="width:100%">
                     <thead>
                     <tr>
                         <th class="no-sort align-center"> <input type="checkbox" name="selectAllRegistro" /> </th>
-                        <th class="">Estado</th>
-                        <th class="align-center">Sigla</th>
-                        <th class="align-center">Bandeira</th>
+                        <th class="">Presidente</th>
+                        <th class="">Bairro</th>
+                        <th class="align-center">Data</th>
                         <th class="no-sort align-center">Ações</th>
                     </tr>
                     </thead>

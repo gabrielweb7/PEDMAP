@@ -96,10 +96,6 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/select2.css') }}" />
 
-    <!-- Notyv3 -->
-    <link rel="stylesheet" href="{{ asset('plugins/notyv3/noty.css') }}" />
-    <link rel="stylesheet" href="{{ asset('plugins/notyv3/themes/metroui.css') }}" />
-
     <!-- include summernote css/js -->
     <link href="{{ asset('plugins/summernote/0.8.12/summernote-bs4.css') }}" rel="stylesheet">
 
@@ -188,9 +184,6 @@
     <script src="{{ asset('plugins/select2/select2.js') }}"></script>
     <script src="{{ asset('plugins/select2/select2-br.js') }}"></script>
 
-    <!-- Noty -->
-    <script src="{{ asset('plugins/notyv3/noty.js') }}" type="text/javascript"></script>
-
     <!-- Site JS Helpers -->
     <script src="{{ asset('js/helpers.js') }}"></script>
 
@@ -213,48 +206,11 @@
     <script src="{{ asset('templates/default/site.js') }}"></script>
 
     <script>
-
         $(function() { 
             $("body").iconWhatsFixed({ celular: '556799843212', mensagem: '[Suporte Pedmap]: Olá, tudo bem ?' });
         });
-
-        @if(Request::has('created'))
-            setTimeout(function() { 
-                new Noty({
-                    text: '<i class="fas fa-check" style="padding-right:8px; font-size:18px;"></i> <span style="position:relative;top:-2px;"> Registro Salvo.</span> ',
-                    theme: 'metroui',
-                    layout: 'bottomRight',
-                    type: 'success',
-                    timeout: 3000
-                }).show();
-            },500);
-        @endif
-
-        @if(Request::has('update'))
-            setTimeout(function() { 
-                new Noty({
-                    text: '<i class="fas fa-check" style="padding-right:8px; font-size:18px;"></i> <span style="position:relative;top:-2px;"> Registro Atualizado.</span> ',
-                    theme: 'metroui',
-                    layout: 'bottomRight',
-                    type: 'success',
-                    timeout: 3000
-                }).show();
-            },500);
-        @endif
-
-        @if(Request::has('deleted'))
-            setTimeout(function() { 
-                new Noty({
-                    text: '<i class="fas fa-trash-alt" style=" padding-right:8px; font-size:18px;"></i> <span style="position:relative;top:-2px;"> Registro Deletado.</span> ',
-                    theme: 'metroui',
-                    layout: 'bottomRight',
-                    type: 'error',
-                    timeout: 3000
-                }).show();
-            },500);
-        @endif
-
     </script>
+
 
     <!-- **************************************
 

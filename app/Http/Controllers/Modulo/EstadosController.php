@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Modulo;
 use App\Http\Controllers\Controller;
 
 /* Request Validates */
-use App\Http\Requests\modulo\estados\CreateValidate;
-use App\Http\Requests\modulo\estados\UpdateValidate;
+use App\Http\Requests\modulo\presidentebairro\CreateValidate;
+use App\Http\Requests\modulo\presidentebairro\UpdateValidate;
 
 /* Http */
 use Illuminate\Http\Request;
@@ -22,28 +22,28 @@ use Illuminate\Support\Facades\DB;
 /* Models */
 use App\Modulos;
 
-class EstadosController extends Controller
+class PresidenteDoBairroController extends Controller
 {
 
     /* Configurações do Modulo */
-    var $moduloNome = "estados";
+    var $moduloNome = "presidentebairro";
 
     /* Tabela Admin */
-    var $tableName = "modulo_estados";
+    var $tableName = "modulo_presidentesdobairro";
 
     /* Model*/
-    var $moduloClass = \App\Estados::class;
+    var $moduloClass = \App\PresidentesBairro::class;
     var $model = null; /* Model admin */
     var $clienteModel = null; /* Model Client */
 
     /* Select > Select */
-    var $moduloTableColunasSelect = array('id','nome','sigla','bandeira'); /* Colunas Select SQL */
+    var $moduloTableColunasSelect = array('id','bairro_id','nome','datahora'); /* Colunas Select SQL */
 
     /* Select > Search */
-    var $moduloTableColunasSearch = array('nome','sigla','bandeira'); /* Colunas Search Like SQL */
+    var $moduloTableColunasSearch = array('bairro_id','nome'); /* Colunas Search Like SQL */
 
     /* Select > Front End */
-    var $moduloTableColunasOrdemFrontEnd = array('id','nome','sigla','bandeira'); /* Colunas na ordem visivel do FRONT-END */
+    var $moduloTableColunasOrdemFrontEnd = array('id','nome','bairro_id','datahora'); /* Colunas na ordem visivel do FRONT-END */
 
     /* Coluna de datahora registro criado SQL */
     var $moduloTableColunaDataHora = 'datahora';
@@ -56,6 +56,7 @@ class EstadosController extends Controller
         $menuItem = $this->getMenuModuloVars();
         return view('template.default.dashboard.modulos.'.$this->moduloNome.'.listar', compact("menuItem"));
     }
+
 
     /* POST: Listagem AJAX: Alimentar datatable com registros da tb */
     public function listar(Request $request) {
@@ -114,14 +115,11 @@ class EstadosController extends Controller
              $loopData[] = '<input type="checkbox" name="selectRegistro" value="'.base64_encode($registro->id).'" />';
  
              $loopData[] = (string)$registro->nome;
-             $loopData[] = (string)$registro->sigla;
-             
-             if(!empty($registro->bandeira)) { 
-                $loopData[] = (string)"<img src='".$registro->bandeira."' style='height:30px;' />";
-             } else { 
-                $loopData[] = "";
-             } 
-
+ 
+             $loopData[] = (string)$registro->bairro->bairro;
+ 
+             $loopData[] = (string)$registro->datahora->format('H:i').'<br/>'.$registro->datahora->format('d/m/Y');
+ 
              /* Actions Buttons*/
              $loopData[] = (string)'<a href="'.route('modulo-'.$this->moduloNome.'-update', base64_encode($registro->id)).'"><button type="button" class="btn btn-info">Editar</button></a>';
  
@@ -158,14 +156,14 @@ class EstadosController extends Controller
 
         $registro->nome = $request->nome;
 
-        $registro->sigla = $request->sigla;
+        $registro->bairro_id = $request->bairro_id;
 
-        $registro->bandeira = $request->bandeira;
+        $registro->datahora = date('Y-m-d H:i:s');
 
         $registro->save();
 
         /* Redireciona para index do modulo */
-        return redirect()->route($menuItem->route_name, ['created' => true]);
+        return redirect()->route($menuItem->route_name);
 
     }
 
@@ -201,7 +199,7 @@ class EstadosController extends Controller
 
         $registro->save();
 
-        return redirect()->route('modulo-'.$this->moduloNome.'-update', ['id' => $request->id, 'update' => true]);
+        return redirect()->route('modulo-'.$this->moduloNome.'-update', $request->id);
 
     }
 
@@ -257,6 +255,7 @@ class EstadosController extends Controller
         return 1;
     }
 
+
     /* GET:: AJAX - delete Cadastros */
     public function deleteAjax(Request $request) {
         if(is_array($request->id)){
@@ -284,13 +283,14 @@ class EstadosController extends Controller
             $registro->update(['datahora_deleted' => date('Y-m-d H:i:s')]);
         }
 
-        return redirect()->route($menuItem->route_name, ['deleted' => true]);
+        return redirect()->route($menuItem->route_name);
     }
 
     /* Function: Modulo Variaveis */
     public function getMenuModuloVars() {
         return Modulos::where('modulo_nome', '=', $this->moduloNome)->first();
     }
+
 
     // Modal Ajax List Filtered by Id
     public function jsonRegistroById(Request $request) { 

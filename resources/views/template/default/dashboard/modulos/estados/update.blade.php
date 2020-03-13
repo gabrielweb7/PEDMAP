@@ -64,36 +64,25 @@
                     <div class="row">
 
                         <!-- Input -->
-                        <div class="form-group col-lg-10">
-                            <label for="nome">Estado</label>
+                        <div class="form-group col-lg-6">
+                            <label for="nome">Nome do Presidente</label>
                             <!-- Class: is-invalid or valid -->
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="" value="@php echo (!empty(old('nome')))?old('nome'):$registro->nome; @endphp">
                             <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
                         </div>
 
-                         <!-- Input -->
-                         <div class="form-group col-lg-2">
-                            <label for="nome">Sigla</label>
-                            <!-- Class: is-invalid or valid -->
-                            <input type="text" class="form-control" id="sigla" name="sigla" placeholder="" value="@php echo (!empty(old('sigla')))?old('sigla'):$registro->sigla; @endphp">
-                            <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
+                        <div class="form-group col-lg-6">
+                            <label for="bairro_id">Bairro</label>
+                            <select class="form-control" id="bairro_id" name="bairro_id" >
+                               <!-- alimentando via ajax -->
+                               <option value="{{ $registro->bairro_id }}" selected> {{ $registro->bairro->bairro }} </option>
+                            </select>
+                            <!-- <div class="valid-feedback">Este e-mail já existe em nosso banco de dados.</div>-->
                         </div>
 
-                        <!-- Input -->
-                        <div class="form-group col-lg-12">
-                            <label for="nome">Imagem URL (Http://)</label>
-                            <!-- Class: is-invalid or valid -->
-                            <input type="text" class="form-control" id="bandeira" name="bandeira" placeholder="" value="@php echo (!empty(old('bandeira')))?old('bandeira'):$registro->bandeira; @endphp">
-                            <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
-                       
-                            @if(isset($registro->bandeira))
-                                @if(!empty($registro->bandeira))
-                                    <div class="imgPreview" style='padding-top:15px;'>
-                                        <img src="{{ $registro->bandeira }}" alt="" style='height:150px;' />
-                                    </div>    
-                                @endif
-                            @endif
-                            
+                        <div class="form-group col-lg-3">
+                            <div> <b>Criado em</b></div>
+                            <div> {{ $registro->datahora->format('d/m/Y - H:i') }}</div>
                         </div>
 
                     </div>

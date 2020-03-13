@@ -260,7 +260,7 @@ class UsuariosController extends Controller
         }
 
         /* Redireciona para index do modulo */
-        return redirect()->route($menuItem->route_name, ['created' => true]);
+        return redirect()->route($menuItem->route_name);
 
     }
 
@@ -310,7 +310,7 @@ class UsuariosController extends Controller
 
         $registro->save();
 
-        return redirect()->route('modulo-'.$this->moduloNome.'-update', ['id' => $request->id, 'update' => true]);
+        return redirect()->route('modulo-'.$this->moduloNome.'-update', $request->id);
     }
 
     /* POST:: AJAX - Remover Imagem from Registro */
@@ -366,7 +366,7 @@ class UsuariosController extends Controller
             $registro->update(['datahora_deleted' => date('Y-m-d H:i:s')]);
         }
 
-        return redirect()->route($menuItem->route_name, ['deleted' => true]);
+        return redirect()->route($menuItem->route_name);
     }
 
     /* Function: Modulo Variaveis */

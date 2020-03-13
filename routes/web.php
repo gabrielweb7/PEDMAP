@@ -112,8 +112,8 @@ Route::prefix('anotacoes')->group(function () {
 });
 
 
-/* Modulo: noticias */
-Route::prefix('noticias')->group(function () {
+  /* Modulo: noticias */
+  Route::prefix('noticias')->group(function () {
 
     Route::get('/', 'Modulo\NoticiasController@index')->name('modulo-noticias-index')->middleware('SomenteLogado');
 
@@ -127,6 +127,8 @@ Route::prefix('noticias')->group(function () {
     Route::post('/update', 'Modulo\NoticiasController@updatePost')->name('modulo-noticias-update-post')->middleware('SomenteLogado');
 
     Route::get('/delete/{id}', 'Modulo\NoticiasController@delete')->name('modulo-noticias-delete')->middleware('SomenteLogado');
+
+   
 
 });
 
@@ -407,14 +409,15 @@ Route::prefix('configuracoes')->group(function () {
 
     });
 
-    
     /* Modulo: cidades */
     Route::prefix('cidades')->group(function () {
 
         Route::get('/', 'Modulo\CidadesController@index')->name('modulo-cidades-index')->middleware('SomenteLogado');
+
         
         Route::get('/create', 'Modulo\CidadesController@create')->name('modulo-cidades-create')->middleware('SomenteLogado');
         Route::post('/create', 'Modulo\CidadesController@createPost')->name('modulo-cidades-create-post')->middleware('SomenteLogado');
+
 
         Route::post('/ajax/listar', 'Modulo\CidadesController@listar')->name('modulo-cidades-listar')->middleware('SomenteLogado');
         Route::post('/ajax/registro/removerImagem', 'Modulo\CidadesController@removerImagemFromRegistro')->name('modulo-cidades-remove-image')->middleware('SomenteLogado');
@@ -434,10 +437,9 @@ Route::prefix('configuracoes')->group(function () {
         Route::get('/ajax/jsonRegistrosByLikeBairro', 'Modulo\CidadesController@jsonRegistrosByLikeBairro')->name('modulo-cidades-jsonRegistrosByLikeBairro')->middleware('SomenteLogado');
 
     });
-    
 
-    /* Modulo: Bairros */
-    Route::prefix('bairros')->group(function () {
+     /* Modulo: Bairros */
+     Route::prefix('bairros')->group(function () {
 
         Route::get('/', 'Modulo\BairrosController@index')->name('modulo-bairros-index')->middleware('SomenteLogado');
         
