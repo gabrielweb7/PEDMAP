@@ -184,7 +184,7 @@ class NoticiasCatController extends Controller
         $registro->save();
 
         /* Redireciona para index do modulo */
-        return redirect()->route($menuItem->route_name);
+        return redirect()->route($menuItem->route_name,['created'=>1]);
 
     }
 
@@ -239,7 +239,7 @@ class NoticiasCatController extends Controller
 
         $registro->save();
 
-        return redirect()->route('modulo-'.$this->moduloNome.'-update', $request->id);
+        return redirect()->route('modulo-'.$this->moduloNome.'-update', ['id'=>$request->id,'update'=>1]);
 
     }
 
@@ -297,7 +297,7 @@ class NoticiasCatController extends Controller
             $registro->update(['datahora_deleted' => date('Y-m-d H:i:s')]);
         }
 
-        return redirect()->route($menuItem->route_name);
+        return redirect()->route($menuItem->route_name,['deleted'=>1]);
     }
 
     /* Function: Modulo Variaveis */
