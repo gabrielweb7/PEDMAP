@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Modulo;
 
 use App\Http\Controllers\Controller;
 
+
 /* Request Validates */
-use App\Http\Requests\modulo\presidentebairro\CreateValidate;
-use App\Http\Requests\modulo\presidentebairro\UpdateValidate;
+use App\Http\Requests\modulo\estados\CreateValidate;
+use App\Http\Requests\modulo\estados\UpdateValidate;
 
 /* Http */
 use Illuminate\Http\Request;
@@ -22,28 +23,30 @@ use Illuminate\Support\Facades\DB;
 /* Models */
 use App\Modulos;
 
-class PresidenteDoBairroController extends Controller
+class EstadosController extends Controller
 {
 
     /* Configurações do Modulo */
-    var $moduloNome = "presidentebairro";
+    var $moduloNome = "estados";
 
     /* Tabela Admin */
-    var $tableName = "modulo_presidentesdobairro";
+    var $tableName = "modulo_estados";
 
     /* Model*/
-    var $moduloClass = \App\PresidentesBairro::class;
+    var $moduloClass = \App\Estados::class;
     var $model = null; /* Model admin */
-    var $clienteModel = null; /* Model Client */
+
+    /* Unir a tabela cliente com Tabela Admin  */
+    var $unirTabelaClienteComAdmin = true;
 
     /* Select > Select */
-    var $moduloTableColunasSelect = array('id','bairro_id','nome','datahora'); /* Colunas Select SQL */
+    var $moduloTableColunasSelect = array('id','nome','sigla','bandeira','datahora'); /* Colunas Select SQL */
 
     /* Select > Search */
-    var $moduloTableColunasSearch = array('bairro_id','nome'); /* Colunas Search Like SQL */
+    var $moduloTableColunasSearch = array('nome','sigla','bandeira'); /* Colunas Search Like SQL */
 
     /* Select > Front End */
-    var $moduloTableColunasOrdemFrontEnd = array('id','nome','bairro_id','datahora'); /* Colunas na ordem visivel do FRONT-END */
+    var $moduloTableColunasOrdemFrontEnd = array('id','nome','sigla','bandeira','datahora'); /* Colunas na ordem visivel do FRONT-END */
 
     /* Coluna de datahora registro criado SQL */
     var $moduloTableColunaDataHora = 'datahora';
@@ -116,9 +119,11 @@ class PresidenteDoBairroController extends Controller
  
              $loopData[] = (string)$registro->nome;
  
-             $loopData[] = (string)$registro->bairro->bairro;
+             $loopData[] = (string)$registro->sigla;
  
-             $loopData[] = (string)$registro->datahora->format('H:i').'<br/>'.$registro->datahora->format('d/m/Y');
+             $loopData[] = (string)$registro->imagem();
+
+             $loopData[] = (string)$registro->datahora();
  
              /* Actions Buttons*/
              $loopData[] = (string)'<a href="'.route('modulo-'.$this->moduloNome.'-update', base64_encode($registro->id)).'"><button type="button" class="btn btn-info">Editar</button></a>';
@@ -156,7 +161,9 @@ class PresidenteDoBairroController extends Controller
 
         $registro->nome = $request->nome;
 
-        $registro->bairro_id = $request->bairro_id;
+        $registro->sigla = $request->sigla;
+
+        $registro->bandeira = $request->bandeira;
 
         $registro->datahora = date('Y-m-d H:i:s');
 
@@ -193,9 +200,10 @@ class PresidenteDoBairroController extends Controller
 
         $registro->nome = $request->nome;
 
-        $registro->bairro_id = $request->bairro_id;
+        $registro->sigla = $request->sigla;
 
-        $registro->datahora = date('Y-m-d H:i:s');
+        $registro->bandeira = $request->bandeira;
+
 
         $registro->save();
 
@@ -305,39 +313,6 @@ class PresidenteDoBairroController extends Controller
 
     }
 
-    // jsonRegistrosByLikeBairro
-    public function jsonRegistrosByLikeBairro(Request $request) {
-        
-        $eventos = $this->moduloClass::where('bairro','like','%'.$request->bairro.'%')->orderBy('datahora','desc'); 
-
-        if($eventos->count() > 0) { 
-
-            $_html = "";
-            foreach($eventos->get() as $registro) { 
-                
-                $_html .= "<tr>";
-
-                    if($registro->categoria == "bandeiraco") { $registro->categoria = "Bandeiraço"; }
-                    else if($registro->categoria == "reuniao") { $registro->categoria = "Reunião"; }
-                    else if($registro->categoria == "comicio") { $registro->categoria = "Comício"; }
-                    else if($registro->categoria == "caminhada") { $registro->categoria = "Caminhada"; }
-                    else if($registro->categoria == "carreata") { $registro->categoria = "Carreata"; }
-                    else { $registro->categoria = "Sem Categoria"; }
-
-                    $_html .= "<td> {$registro->titulo} </td>";
-                    $_html .= "<td style='text-align:center;'> {$registro->categoria} </td>";
-                    $_html .= "<td style='text-align:center;'> {$registro->numero_de_participantes} </td>";
-                    $_html .= "<td style='text-align:center;'> {$registro->dataDoEvento->format('H:i')}<br />{$registro->dataDoEvento->format('d/m/Y')} </td>";
-                    $_html .= "<td style='text-align:center;'> <button type='button' onclick=\"alert('Em andamento')\" class='btn btn-info' style='font-size: 14px; border: 0px; background: #1070d4;'><i class='far fa-edit'></i></button>  </td>";      
-
-                $_html .= "</tr>";
-            }
-            
-        } else { 
-            $_html = "<td colspan='5' style='padding:20px;text-align:center;'> Nenhum registro encontrado :( </td>";
-        }
-
-        return $_html;
-    }
+   
 
 }

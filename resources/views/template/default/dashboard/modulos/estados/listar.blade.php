@@ -44,14 +44,16 @@
                     <thead>
                     <tr>
                         <th class="no-sort align-center"> <input type="checkbox" name="selectAllRegistro" /> </th>
-                        <th class="">Presidente</th>
-                        <th class="">Bairro</th>
+                        <th class="">Estado</th>
+                        <th class="">Sigla</th>
+                        <th class="align-center">Bandeira</th>
                         <th class="align-center">Data</th>
                         <th class="no-sort align-center">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

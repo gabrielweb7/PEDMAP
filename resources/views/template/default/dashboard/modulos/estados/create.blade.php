@@ -55,19 +55,22 @@
                     <div class="row">
 
                         <div class="form-group col-lg-6">
-                            <label for="nome">Nome do Presidente</label>
+                            <label for="nome">Estado</label>
                             <!-- Class: is-invalid or valid -->
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="" value="{{ old('nome') }}">
                             <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
                         </div>
-
                         <div class="form-group col-lg-6">
-                            <label for="bairro_id">Bairro</label>
-                            <select class="form-control" id="bairro_id" name="bairro_id" >
-                               <!-- alimentando via ajax -->
-                               <option value=""> Escolha uma opção! </option>
-                            </select>
-                            <!-- <div class="valid-feedback">Este e-mail já existe em nosso banco de dados.</div>-->
+                            <label for="nome">Sigla</label>
+                            <!-- Class: is-invalid or valid -->
+                            <input type="text" class="form-control" id="sigla" name="sigla" placeholder="" value="{{ old('sigla') }}">
+                            <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="nome">Bandeira (URL IMAGE)</label>
+                            <!-- Class: is-invalid or valid -->
+                            <input type="text" class="form-control" id="bandeira" name="bandeira" placeholder="" value="{{ old('bandeira') }}">
+                            <!-- <div class="invalid-feedback">Este e-mail já existe em nosso banco de dados.</div> -->
                         </div>
 
                     </div>
