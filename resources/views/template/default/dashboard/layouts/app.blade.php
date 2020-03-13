@@ -98,6 +98,10 @@
 
     <!-- include summernote css/js -->
     <link href="{{ asset('plugins/summernote/0.8.12/summernote-bs4.css') }}" rel="stylesheet">
+        
+    <!-- Note -->
+    <link rel="stylesheet" href="{{ asset('plugins/notyv3/noty.css') }}" />
+    <link rel="stylesheet" href="{{ asset('plugins/notyv3/themes/metroui.css') }}" />
 
     <!-- Style CSS HELPERS -->
     <link rel="stylesheet" href="{{ asset('css/helpers.css') }}" />
@@ -110,6 +114,9 @@
 
     <!-- Style Responsive CSS Template -->
     <link rel="stylesheet" href="{{ asset('templates/default/responsive.css') }}" />
+
+
+    
 
 </head>
 <body class="dashboard" style="background-image: url('https://imgur.com/OZJHNWg.png');background-size: cover;">
@@ -202,6 +209,9 @@
     <!-- Site JS modalGraficos.js -->
     <script src="{{ asset('templates/default/modal/modalGraficos.js') }}"></script>
 
+    <!-- Noty -->
+    <script src="{{ asset('plugins/notyv3/noty.js') }}"></script>
+
     <!-- Site JS Template -->
     <script src="{{ asset('templates/default/site.js') }}"></script>
 
@@ -209,7 +219,38 @@
         $(function() { 
             $("body").iconWhatsFixed({ celular: '556799843212', mensagem: '[Suporte Pedmap]: Olá, tudo bem ?' });
         });
+
+        @if(\Request::get('created'))
+            new Noty({
+                type: 'success',
+                theme: 'metroui',
+                text: '<i class="fas fa-check"></i> Registro Criado com Sucesso',
+                layout: 'bottomRight'
+            }).show();
+        @endif
+
+
+        @if(\Request::get('update'))
+            new Noty({
+                type: 'info',
+                theme: 'metroui',
+                text: '<i class="fas fa-check"></i> Registro Atualizado com Sucesso',
+                layout: 'bottomRight'
+            }).show();
+        @endif
+
+        @if(\Request::get('deleted'))
+            new Noty({
+                type: 'error',
+                theme: 'metroui',
+                text: '<i class="far fa-trash-alt"></i> Registro Deletado com Sucesso!',
+                layout: 'bottomRight'
+            }).show();
+        @endif
+
     </script>
+
+
 
 
     <!-- **************************************
