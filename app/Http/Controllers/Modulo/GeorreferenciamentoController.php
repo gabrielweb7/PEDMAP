@@ -15,6 +15,7 @@ use App\BairrosRegioes;
 use App\Escolas;
 use App\UnidadesSaude;
 use App\Indicadores;
+use App\PresidentesBairro;
 
 use DB;
 
@@ -37,14 +38,30 @@ class GeorreferenciamentoController extends Controller
 
     public function ajaxGetInfowindowGeral(Request $request) { 
         
-        
-        $html = "<b>Presidente do Bairro:</b>  Nome Completo  <br />";
-        
-        $db = DB::table('bairrobd')->where('bairro','like','%'.$request->bairro.'%')->first();
+        $html = "";
 
-        if($db) { 
-            $html .= $db->texto;
-        }
+        $db = BairrosRegioes::where('bairro','like','%'.$request->bairro.'%');
+        
+        if($db->count()) { 
+
+            $db = $db->first();
+
+            $presidente = PresidentesBairro::where('bairro_id','=',$db->id);
+            
+            if($presidente->count()) { 
+                $presidente = $presidente->first();
+                $html .= "<b>Presidente do  Bairro:</b>  ".$presidente->nome."  <br /><br />";
+            }
+
+            if(!empty($db->texto)) { 
+                $html .= $db->texto;
+                return $html;
+            }
+
+        }  
+        
+        $html = "Entre em contato com o administrador para atualizar o texto sobre o Bairro.";
+        
 
         return $html;
     }
