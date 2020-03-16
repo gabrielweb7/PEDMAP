@@ -213,7 +213,6 @@ Route::prefix('georreferenciamento')->group(function () {
 
     Route::get('/ajax/get/infowindow/geral', 'Modulo\GeorreferenciamentoController@ajaxGetInfowindowGeral')->name('modulo-geo-ajaxGetInfowindowGeral')->middleware('SomenteLogado');
 
-
 });
 
 /* Prefix: Configurações */
@@ -501,11 +500,33 @@ use App\PresidentesBairro;
 
 Route::get('/test', function() {
 
-    $user = PresidentesBairro::find(1);
+    $db = DB::table('bairrobd')->orderBy('bairro','asc')->get();
 
+    $_html = "";
+    
+    foreach($db as $bairro) { 
+        
+        $modulo_bairros = \App\BairrosRegioes::where('bairro','like','%'.$bairro->bairro.'%')->get();
 
-    return dd($user->bairro()->first()->cidade->nome);
+        if($modulo_bairros->count()) { 
 
+            $m = $modulo_bairros->first();
+
+            $m->texto = $bairro->texto;
+
+            $m->save();
+
+            $_html .= "[bairrobd]: ".$bairro->bairro."  ---> Update ";
+            
+            $_html .= "<br />";
+
+        }
+
+    }
+
+    $_html .= "<br /><br />[bairrobd]:count:: ". $db->count();
+
+    return $_html;
 
 })->middleware('SomenteLogadoDeveloper');
 

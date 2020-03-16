@@ -34,10 +34,10 @@ class BairrosController extends Controller
     var $clienteModel = null; /* Model Client */
 
     /* Select > Select */
-    var $moduloTableColunasSelect = array('id','cidade_id','bairro','regiao'); /* Colunas Select SQL */
+    var $moduloTableColunasSelect = array('id','cidade_id','bairro','regiao','texto'); /* Colunas Select SQL */
 
     /* Select > Search */
-    var $moduloTableColunasSearch = array('cidade_id','bairro','regiao'); /* Colunas Search Like SQL */
+    var $moduloTableColunasSearch = array('cidade_id','bairro','regiao','texto'); /* Colunas Search Like SQL */
 
     /* Select > Front End */
     var $moduloTableColunasOrdemFrontEnd = array('id','bairro','regiao','cidade_id'); /* Colunas na ordem visivel do FRONT-END */
@@ -157,6 +157,8 @@ class BairrosController extends Controller
 
         $registro->cidade_id = $request->cidade_id;
 
+        $registro->texto = $request->texto;
+
         $registro->save();
 
         /* Redireciona para index do modulo */
@@ -193,6 +195,8 @@ class BairrosController extends Controller
         $registro->regiao = $request->regiao;
 
         $registro->cidade_id = $request->cidade_id;
+
+        $registro->texto = $request->texto;
 
 
         $registro->save();

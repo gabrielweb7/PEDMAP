@@ -88,6 +88,16 @@
                             <!-- <div class="valid-feedback">Este e-mail já existe em nosso banco de dados.</div>-->
                         </div>
 
+                        <div class="form-group col-lg-12">
+                            <label for="resumo">Texto</label>
+
+                            <!-- TextArea -->
+                            <textarea id="summernote" name="texto" style="display:none;"> @php echo (!empty(old('texto')))?old('texto'):$registro->texto; @endphp </textarea>
+
+                            <!-- <div class="valid-feedback">Este e-mail já existe em nosso banco de dados.</div>-->
+                        </div>
+
+
                     </div>
 
                 </div>
