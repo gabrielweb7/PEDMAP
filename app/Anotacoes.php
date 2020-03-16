@@ -14,4 +14,17 @@ class Anotacoes extends Model
     public $timestamps = false;
 
 
+    public function datahora() { 
+        if(!empty($this->datahora) and isset($this->datahora)) { 
+            return $this->datahora->format('d/m/Y').' '.$this->datahora->format('H:i');
+        } 
+        return '';
+    }
+
+    public function bairro() { 
+        return $this->hasOne('App\BairrosRegioes','id','bairro_id')->first();
+    }
+
+    
+
 }

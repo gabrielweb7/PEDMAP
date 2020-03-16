@@ -112,8 +112,8 @@ Route::prefix('anotacoes')->group(function () {
 });
 
 
-  /* Modulo: noticias */
-  Route::prefix('noticias')->group(function () {
+/* Modulo: noticias */
+Route::prefix('noticias')->group(function () {
 
     Route::get('/', 'Modulo\NoticiasController@index')->name('modulo-noticias-index')->middleware('SomenteLogado');
 
@@ -128,12 +128,10 @@ Route::prefix('anotacoes')->group(function () {
 
     Route::get('/delete/{id}', 'Modulo\NoticiasController@delete')->name('modulo-noticias-delete')->middleware('SomenteLogado');
 
-   
-
 });
 
 
-/* Modulo: noticias */
+/* Modulo: eventos  */
 Route::prefix('eventos')->group(function () {
 
     Route::get('/', 'Modulo\EventosController@index')->name('modulo-eventos-index')->middleware('SomenteLogado');
@@ -152,8 +150,10 @@ Route::prefix('eventos')->group(function () {
 
 });
 
- /* Modulo: pesquisa-interna */
- Route::prefix('pesquisa-interna')->group(function () {
+
+
+/* Modulo: pesquisa-interna */
+Route::prefix('pesquisa-interna')->group(function () {
 
     Route::get('/', 'Modulo\PesquisaInternaController@index')->name('modulo-pesquisa-interna-index')->middleware('SomenteLogado');
 
@@ -168,9 +168,35 @@ Route::prefix('eventos')->group(function () {
 
 });
 
-
 /* Prefix: Cadastros */
 Route::prefix('cadastros')->group(function () {
+
+    /* Modulo: eventos  */
+    Route::prefix('anotacoes')->group(function () {
+
+        Route::get('/', 'Modulo\AnotacoesController@index')->name('modulo-anotacoes-index')->middleware('SomenteLogado');
+
+        Route::post('/ajax/listar', 'Modulo\AnotacoesController@listar')->name('modulo-anotacoes-listar')->middleware('SomenteLogado');
+        Route::post('/ajax/registro/removerImagem', 'Modulo\AnotacoesController@removerImagemFromRegistro')->name('modulo-anotacoes-remove-image')->middleware('SomenteLogado');
+        Route::post('/ajax/registro/removerArquivo', 'Modulo\AnotacoesController@removerArquivoFromRegistro')->name('modulo-anotacoes-remove-arquivo')->middleware('SomenteLogado');
+
+        Route::get('/create', 'Modulo\AnotacoesController@create')->name('modulo-anotacoes-create')->middleware('SomenteLogado');
+        Route::post('/create', 'Modulo\AnotacoesController@createPost')->name('modulo-anotacoes-create-post')->middleware('SomenteLogado');
+
+        // Modal Ajax List Filtered by Id
+        Route::get('/ajax/jsonRegistroById', 'Modulo\EventosController@jsonRegistroById')->name('modulo-eventos-jsonRegistroById')->middleware('SomenteLogado');
+
+        // Modal Ajax List Filtered by Like Bairros
+        Route::get('/ajax/jsonRegistrosByLikeBairro', 'Modulo\EventosController@jsonRegistrosByLikeBairro')->name('modulo-eventos-jsonRegistrosByLikeBairro')->middleware('SomenteLogado');
+ 
+        Route::post('/ajax/deletar', 'Modulo\AnotacoesController@deleteAjax')->name('modulo-anotacoes-delete-post')->middleware('SomenteLogado');
+
+        Route::get('/update/{id}', 'Modulo\AnotacoesController@update')->name('modulo-anotacoes-update')->middleware('SomenteLogado');
+        Route::post('/update', 'Modulo\AnotacoesController@updatePost')->name('modulo-anotacoes-update-post')->middleware('SomenteLogado');
+
+        Route::get('/delete/{id}', 'Modulo\AnotacoesController@delete')->name('modulo-anotacoes-delete')->middleware('SomenteLogado');
+
+    });
 
     /* Modulo: noticias */
     Route::prefix('noticias')->group(function () {

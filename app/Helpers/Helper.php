@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Helper
 {
+    
     public static function assetStorage(string $string)
     {
         /* Se imagem não existir no storage */
@@ -28,5 +29,17 @@ class Helper
         return Storage::url($string);
     }
 
+    public static function limitarTexto(string $texto, int $limite){
+        $contador = strlen($texto);
+        if ( $contador >= $limite ) {      
+            $texto = substr($texto, 0, strrpos(substr($texto, 0, $limite), ' ')) . '...';
+            return $texto;
+        }
+        else{
+            return $texto;
+        }
+    } 
+
 
 }
+
